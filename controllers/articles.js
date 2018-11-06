@@ -1,4 +1,5 @@
 const { Article, Comment } = require("../models");
+const { commentCount } = require("../utilities");
 
 const getArticles = (req, res, next) => {
   Article.find()
@@ -18,6 +19,9 @@ const getArticleById = (req, res, next) => {
     .lean()
     .then(article => {
       if (!article) throw { msg: "Article Not Found", status: 404 };
+      return commentCount(article);
+    })
+    .then(article => {
       res.status(200).send({ article });
     })
     .catch(next);
@@ -52,7 +56,12 @@ const addCommentByArticle = (req, res, next) => {
 };
 const changeVotesOfArticle = (req, res, next) => {
   const { article_id } = req.params;
-  const votes = req.query.vote == "up" ? 1 : req.query.vote == "down" ? -1 : 0;
+  const votes =
+    req.query.vote == "up"
+      ? 1
+      : req.query.vote == "down"
+        ? -1
+        : Math.floor(Math.random() * 10);
   Article.findByIdAndUpdate(
     article_id,
     { $inc: { votes: votes } },

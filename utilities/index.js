@@ -1,3 +1,5 @@
+const { Comment } = require("../models");
+
 exports.formatArticles = (articleData, userDocs) => {
   return articleData.map(article => ({
     ...article,
@@ -14,4 +16,12 @@ exports.formatComments = (commentData, userDocs, articleDocs) => {
       article => comment.belongs_to === article.title
     )._id
   }));
+};
+
+exports.commentCount = article => {
+  return Comment.find({ belongs_to: article._id }).then(comments => {
+    const total = comments.length;
+    article.commentcount = total;
+    return article;
+  });
 };

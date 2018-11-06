@@ -20,10 +20,12 @@ const getArticleByTopic = (req, res, next) => {
 };
 
 const addArticleByTopic = (req, res, next) => {
-  const newArticle = req.body;
-  Article.create(newArticle)
-    .then(newArticle => {
-      res.status(201).send(newArticle);
+  const { topic_slug } = req.params;
+  const article = req.body;
+  article.belongs_to = topic_slug;
+  Article.create(article)
+    .then(article => {
+      res.status(201).send(article);
     })
     .catch(next);
 };

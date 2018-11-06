@@ -65,8 +65,7 @@ describe("/api", () => {
         .send({
           title: "test article",
           body: "this is a test article",
-          created_by: "5bd2ed8e6309881b3ef8a89c",
-          belongs_to: "mitch"
+          created_by: "5bd2ed8e6309881b3ef8a89c"
         })
         .expect(201)
         .then(res => {
