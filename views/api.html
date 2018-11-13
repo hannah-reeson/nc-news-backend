@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>NC News</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
-</head>
+  </head>
 
-<body>
-    <h1> NorthCoders News</h1>
-    <br>
-    <br>
-    <br> GET /api/topics/:topic_id/articles
-    <br>Return all the articles for a topic using the topic ID
-    <br>
-    <br>POST /api/topics/:topic_id/articles
-    <br> Adds a new article to a topic using the topic ID
-    <br>
-    <br>GET /api/articles/:article_id
-    <br>Gets an article by its ID
-    <br>
-    <br>GET /api/articles/:article_id/comments
-    <br>Gets all the comments for a individual article
-    <br>
-    <br>POST /api/articles/:article_id/comments
-    <br>Adds a new comment to an article.
-    <br>
-    <br>PATCH /api/articles/:article_id
-    <br>Increases or Decreases the votes by 1 using article ID.
-    <br>
-    <br>GET /api/comments/:comment_id
-    <br>Returns comments from there ID
-    <br>
-    <br>PATCH /api/comments/:comment_id
-    <br>Increases or Decreases the votes by 1 using comment ID.
-    <br>
-    <br>DELETE /api/comments/:comment_id
-    <br>Deletes a comment
-    <br>
-    <br>GET /api/users/:username
-    <br>Returns user profile from there username.
-    <br>
-
-
-</body>
-
+  <body>
+    <h1>NorthCoders News</h1>
+    <br />
+    <br />
+    <br />
+    GET /api/topics/:topic_id/articles <br />Returns all the articles for a
+    topic using the topic ID <br />
+    <br />POST /api/topics/:topic_id/articles <br />
+    Adds a new article to a topic using the topic ID <br />
+    <br />GET /api/articles/:article_id <br />Returns an article by its ID
+    <br />
+    <br />GET /api/articles/:article_id/comments <br />Returns all the comments
+    for a individual article <br />
+    <br />POST /api/articles/:article_id/comments <br />Adds a new comment to an
+    article. <br />
+    <br />PATCH /api/articles/:article_id <br />Increases or Decreases the votes
+    by 1 using article ID.This route requires a vote query of 'up' or 'down' #
+    e.g: `/api/articles/:article_id?vote=up` <br />
+    <br />GET /api/comments/:comment_id <br />Returns comments from there ID
+    <br />
+    <br />PATCH /api/comments/:comment_id <br />Increases or Decreases the votes
+    by 1 using comment ID.This route requires a vote query of 'up' or 'down' #
+    e.g: `/api/comments/:comment_id?vote=down` <br />
+    <br />DELETE /api/comments/:comment_id <br />Deletes a comment <br />
+    <br />GET /api/users/:username <br />Returns user profile from there
+    username. <br />
+  </body>
 </html>
