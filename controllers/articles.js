@@ -36,7 +36,6 @@ const getCommentByArticle = (req, res, next) => {
   Promise.all([
     Article.findById(article_id)
       .populate("created_by")
-      .populate("belongs_to")
       .lean(),
     Comment.find({ belongs_to: article_id })
   ])
