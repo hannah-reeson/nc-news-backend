@@ -33,11 +33,13 @@ const getArticleById = (req, res, next) => {
 
 const getCommentByArticle = (req, res, next) => {
   const { article_id } = req.params;
-  Article.findById(article_id)
-    .populate("created_by")
-    .populate("belongs_to")
-    .lean();
-  Comment.find({ belongs_to: article_id })
+  Promise.all([
+    Article.findById(article_id)
+      .populate("created_by")
+      .populate("belongs_to")
+      .lean(),
+    Comment.find({ belongs_to: article_id })
+  ])
     .then(([article, comments]) => {
       if (!article) throw { msg: "Invalid article ID", status: 400 };
       res.status(200).send({ comments });
