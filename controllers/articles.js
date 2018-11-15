@@ -5,12 +5,11 @@ const getArticles = (req, res, next) => {
   Article.find()
     .populate("created_by")
     .lean()
-    .then(article => {
-      if (!article) throw { msg: "Article Not Found", status: 404 };
-      return commentCount(article);
-    })
     .then(articles => {
-      res.status(200).send({ articles });
+      if (!articles) throw { msg: "Article Not Found", status: 404 };
+      return Promise.all(articles.map(article => commentCount(article))).then(
+        formatted => res.send({ articles: [...formatted] })
+      );
     })
     .catch(next);
 };
