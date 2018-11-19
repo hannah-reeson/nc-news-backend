@@ -37,6 +37,8 @@ const getCommentByArticle = (req, res, next) => {
       .populate("created_by")
       .lean(),
     Comment.find({ belongs_to: article_id })
+      .populate("created_by")
+      .lean()
   ])
     .then(([article, comments]) => {
       if (!article) throw { msg: "Invalid article ID", status: 400 };
