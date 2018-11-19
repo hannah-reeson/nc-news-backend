@@ -1,4 +1,5 @@
 const { Topic, Article } = require("../models/index");
+const { commentCount } = require("../utilities");
 
 const getTopics = (req, res, next) => {
   Topic.find()
@@ -12,9 +13,14 @@ const getArticleByTopic = (req, res, next) => {
   const { topic_slug } = req.params;
   Article.find({ belongs_to: topic_slug })
     .populate("created_by")
+    .lean()
     .then(articles => {
-      if (!articles.length) throw { msg: "Invalid Topic", status: 400 };
-      res.status(200).send({ articles });
+      if (!articles) throw { msg: "Article Not Found", status: 404 };
+      return Promise.all(articles.map(article => commentCount(article))).then(
+        formatted => {
+          res.send({ articles: [...formatted] });
+        }
+      );
     })
     .catch(next);
 };

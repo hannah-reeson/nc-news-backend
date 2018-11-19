@@ -14,6 +14,6 @@ exports.handle404s = (err, req, res, next) => {
   else next(err);
 };
 exports.handle500s = (err, req, res, next) => {
-  if (err.status === 500)
-    res.status(500).send({ msg: err.msg || "Internal Error" });
+  console.log(err);
+  res.status(500).send({ msg: err.msg || "Internal Error" });
 };

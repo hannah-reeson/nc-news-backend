@@ -22,6 +22,7 @@ exports.commentCount = article => {
   return Comment.find({ belongs_to: article._id }).then(comments => {
     const total = comments.length;
     article.commentcount = total;
+
     return article;
   });
 };
